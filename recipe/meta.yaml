@@ -10,7 +10,7 @@ source:
   sha256: "36eef7f7ad4d4b19f03d59d84d68326e950523882aec69674a1af8c14414c3a4"
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv "
 
@@ -19,15 +19,17 @@ requirements:
     - dropbox
     - fsspec
     - pip
-    - python
+    - python {{ python_min }}
     - requests
   run:
     - dropbox
     - fsspec
-    - python
+    - python >={{ python_min }}
     - requests
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - dropboxdrivefs
 
